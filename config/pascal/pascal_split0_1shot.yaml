@@ -1,0 +1,61 @@
+DATA:
+  data_root: /data/home/dataset/voc2012/
+  train_list: /data/home/dataset/voc2012/list/train_sbd_new_fixed_nodup.txt
+  val_list: /data/home/dataset/voc2012/list/val.txt
+  classes: 2
+
+TRAIN:
+  layers: 50
+  sync_bn: True
+  train_h: 473
+  train_w: 473
+  scale_min: 0.9 
+  scale_max: 1.1 
+  rotate_min: -10 
+  rotate_max: 10  
+  zoom_factor: 8 
+  ignore_label: 255
+  padding_label: 255
+  all_zero_ratio: 0
+  aux_weight: 1.0
+  train_gpu: [0]  ## this codebase only supports single GPU training
+  workers: 8  
+  batch_size_val: 1
+  start_epoch: 0
+  manual_seed: 321
+  print_freq: 10
+  save_freq: 1
+  save_path: exp/pascal/split0_1shot/model 
+  weight: 
+  resume:  
+  evaluate: True
+  split: 0
+  way: 1
+  shot: 1
+  val_shot: 1
+  batch_size: 3 
+  lr: 0.0005
+  momentum: 0.9
+  weight_decay: 0.0005
+  lr_milestones: [10000, 20000, 30000] 
+  n_steps: 30000 
+  use_coco: False
+  pretrained_path: 
+  backbone: 'resnet50'
+  epoch_size: 1000 
+  test_num: 5000
+  only_evaluate: False
+
+
+## [Deprecated]
+Distributed:
+  dist_url: tcp://127.0.0.1:6789
+  dist_backend: 'nccl'
+  multiprocessing_distributed: False
+  world_size: 1
+  rank: 0
+  use_apex: False
+  opt_level: 'O0'
+  keep_batchnorm_fp32:
+  loss_scale:
+
